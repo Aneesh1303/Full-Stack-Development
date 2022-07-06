@@ -8,6 +8,11 @@
 8) cd ..: to go one directory backwards.
 9) rm: to remove a file.
 10) clear: to clear the terminal.
+11) git log: keep track and shows your changes.
+12) git config --global user.name: to show your github account name.
+13) git config --global user.name "your user name": to change your github user name.
+14) git config --global user.email: to show your github account email.
+15) git config --global user.email "your email": to change your github email.
 
 git add .: to add the changes.
 git commit -m "message for the commit".
