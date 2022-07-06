@@ -1,0 +1,13 @@
+1) pwd: to display the path of your current working directory.
+2) ls: list the files and folders in your current directory.
+3) echo: to print something on the terminal.
+4) touch: to create files.
+5) mkdir: to create a folder.
+6) rmdir: to remove a folder.
+7) cd: to change working directory.
+8) cd ..: to go one directory backwards.
+9) rm: to remove a file.
+10) clear: to clear the terminal.
+
+git add .: to add the changes.
+git commit -m "message for the commit".
