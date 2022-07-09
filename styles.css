@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Franklin Gothic;
+}
+
+header {
+    height: 300px;
+    background-image: url("Cover.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url("Cover.jpg");
+    background-position: center;
+    background-size: cover;
+    padding: 5px;
+}
+
+footer div.name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+footer div.icons {
+    display: flex;
+}
+
+footer div.icons i {
+    font-size: large;
+    margin: 5px;
+    font-weight: bold;
+}
+
+footer div.icons i:hover {
+    cursor: pointer;
+}
