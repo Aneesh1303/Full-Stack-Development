@@ -1,69 +1,50 @@
-//JSON
-//Literal Notation to create an object
+console.log(document)   //document is an object which is bridge betweem javascript and html.
 
-const temp = {
-    age: 19,
-    brand: "BMW",
-    getBrand: () => {console.log(temp.brand)}
-}
+const ele = document.getElementById("temp");
+console.log(ele);
+console.log(typeof ele);     //It will return type of ele which is object.
+console.log(ele.innerHTML)   //innerHTML whill give us the inner html elements.  
+console.log(ele.innerText)   //innerText will only give us the text present.
 
-console.log(temp.age)
-console.log(temp.brand)
-temp.getBrand()
+//Similarly style is an another object through which we can change csss properties of the elements.
+console.log(ele.style)
+ele.style = "background-color: red; color: white"   //It will change the background-color and color property of element with id temp.
 
-const temp1 = {
-    age: 19,
-    brand: "BMW",
-    getBrand: () => {console.log(this.brand)}   //this is not defined in arrow function. So, it will point to window.
-}
+//getElementsByClassName()    It will select elements with same class name
+//get ElementsByTagName()     It will select according to a specified tag like <button> <p> etc.
+//querySelector()             It will select elements same way we did in stles.css.
 
-temp.getBrand() //it will show window object
+let element = document.getElementsByClassName('temp')   //getElementsByClassName has a html collection to store the elements which does not support various methods like below one.
+//similar for the case in getElementsByTagName both do not support forEach method and other methods as well which are provided by an array.
+// element.forEach((el, i) => {    
+//     el.innerHTML = `Element ${i}`   //it will prduce an error
+// });
 
-const temp2 = {
-    age: 19,
-    brand: "BMW",
-    getBrand: function() {console.log(this.brand)}  //while this is defined in default function while will point to the parent class which is temp2 in this case.
-}
+let element2 = document.querySelectorAll('div.tmp')  //while in case of querySelector it store elements in node list which does support some of the methods of array
+element2.forEach((el, i) => {    
+    el.innerHTML = `Element ${i}`   //while it doesn't
+});
 
-temp.getBrand() //it will show temp2 object.
+const body = document.querySelector('body')
 
-//Array
+const task = ["Coding", "coding", "Web Dev"]
 
-let arr = [1, 2, 3, "string", 'b']  //array is also an object.
+const ol = document.createElement('ol')
 
-//How to iterate through the array
-for(let i=0; i<arr.length; i++) {
-    console.log(arr[i])
-}
-
-//Array methods
-//1. For each
-
-const callBack = function() {
-    console.log('You called me')
-}
-
-arr.forEach(callBack)   //It will iterate through the array and for every element print the message.
-//OR
-
-arr.forEach(() => {
-    console.log("You called me")    //Same as above
+task.forEach(el => {
+    const li = document.createElement('li')
+    const textNode = document.createTextNode(el)
+    li.appendChild(textNode)
+    ol.appendChild(li)
 })
 
-arr.forEach((e, i) => console.log(e, i)) //It will print element and iteration.
+body.appendChild(ol)
 
-// arr.push(element) It will push element at the end of the array.
-// arr.unshift(element) It will push element at the begining of the array.
-// arr.pop() remove the element from the end of the array.
-// arr.slice(start, end) // To slice the array in the range [start, end - 1].
+//Event Listener
+const button = document.querySelector('button')
 
-//map
-
-const Call = (ele, i) => {
-    return ele*2
+const eventListener = () => {
+    console.log('Hi')
 }
 
-let newArray = arr.map(Call)
-console.log(newArray)
-console.log(arr)
-
+button.addEventListener('click', eventListener)     //Accepts type of event and a fucntion.
