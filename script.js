@@ -1,14 +1,43 @@
-console.log(1)
-console.log(2)
-setTimeout(() => {          //setTimeout is a part of web API which will run only after excuting all the stuff which can be a part of call stack.
-    console.log("5")        //Similarly document and window are part of web API.
-}, 1000)
-console.log(3)
-console.log(4)
-
 const response = fetch('https://jsonplaceholder.typicode.com/photos')
-console.log(response)
 
-setTimeout(() => {
-    console.log(response)
-}, 150)
+response.then(res => {
+    console.log(res)
+    const data = res.json()
+    console.log(data)
+    data.then(val => {
+        console.log(val)
+    })
+})
+
+const list = document.querySelector('ol')
+
+fetch('https://jsonplaceholder.typicode.com/photos')
+    .then(response => {
+        return response.json()
+    })
+    .then(data => {
+        console.log(data)
+
+        data.forEach((post) => {
+            console.log(post.title)
+            const ele = document.createElement('li')
+            ele.innerHTML = `${post.title}`
+            list.appendChild(ele)
+        })
+    })
+
+let val = 15
+
+const myFirstPromise = new Promise((Resolve, Reject) => {
+    if(val > 10) {
+        Resolve("Value greater than 10")
+    }
+    else {
+        Reject("Value less than 10")
+    }
+})
+
+myFirstPromise.then(val => {
+
+    console.log(val)
+})
