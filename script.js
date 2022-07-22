@@ -1,89 +1,43 @@
-let value = 9
+const application_id = "c48b3ac7"
+const application_key = "9cf2ee4bb2ccac9e82c5777fa2822457"
+const input = document.querySelector('#Recipe input')
+const button = document.querySelector('#Recipe button')
+const container = document.querySelector('.card-container')
 
-const myFirstResponse = new Promise((resolve, reject) => {
-    if(value > 10) {
-        resolve([{id:1, data: "this is data"}])
-    }
-    else {
-        reject({error: "error fetching data"})
-    }
-})
-
-myFirstResponse.then(response => {
-    console.log(response)
-}).catch(error => {
-    console.log(error)
-})
-
-fetch('https://google.com')
-    .then(response => response.data)
-    .then(data => {
-    console.log(data)
-    }).catch(err => {
-        console.log(err)
-    })
-
-const getData1 = async () => {    //async and await are used in place of then keyword for larger api calls it would be better to use async and await.
-    console.log(1)
-
-    const resp = await fetch('https://jsonplaceholder.typicode.com/photos')
-    const data = await resp.json();
-    console.log(data)
-
-    console.log(2)
+const getRecipe = async (query) => {
+    const endpoint = `https://api.edamam.com/search?q=${query}&app_id=c48b3ac7&app_key=9cf2ee4bb2ccac9e82c5777fa2822457`
+    
+    const res = await fetch(endpoint);
+    const data = await res.json();
+    const { hits } = data;
+    
+    return hits;
 }
 
-getData1()
-
-console.log(3)
-
-
-const getData = async () => {
-    try {
-        const resp = await fetch('https://jsonplaceholder.typicode.com/photos')
-        const data = await resp.json();
-        
-        data.forEach(ele => {
-            const {userId, title} = ele;    //This is called as destructring which is an ES6 method.
-            //We can same do this to an array also
-            // const arr = ["Aneesh", "Aneesh", "Aneesh"]
-            // const [s1, s2, s3] = arr;
-            // console.log(s1, s2, s3)
-            console.log(`${userId} ${title}`)
-        });
-    }
-    catch (err) {
-        console.log(err)
-    }
-    finally {
-        console.log('I will be executed no matter what!!')
-    }
+const createRecipeCard = (image, name, recipeUrl) => {
+    return `<div class="card">
+        <div class="card--img"><img class = "img" src=${image}></div>
+        <div class="card--text">
+            <div class="card--title">
+              ${name}
+            </div>
+            <a href=${recipeUrl} class="cta">View Recipe</a>
+        </div>
+    </div>`
 }
 
-getData()
-
-console.log(1)
-
-clonning
-
-let a1 = {
-    brand: "mercedes"
+const handleSearch = async () => {
+    container.innerHTML = null  //clear the content from the screen
+    const query = input.value
+    const hits = await getRecipe(query)
+    hits.forEach(hit => {
+        console.log(hit)
+        const { recipe } = hit
+        const ele = document.createElement('div')
+        const markup = createRecipeCard(recipe.image, recipe.label, recipe.url)
+        ele.innerHTML = markup
+        container.appendChild(ele)
+    });
 }
 
-let b = a1
-
-b.brand = "BMW"
-
-console.log(a)
-console.log(b)
-
-let a = {
-    brand: "mercedes"
-}
-
-let b = {...a}  //... is a spread operator which is removing brackets like {-...{-brand: "mercedes"-}-} it is going to remove brackets between '-'.
-
-b.brand = "BMW"
-
-console.log(a)
-console.log(b)
+button.addEventListener('click', handleSearch)
