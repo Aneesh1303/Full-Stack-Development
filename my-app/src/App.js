@@ -1,27 +1,15 @@
-import {useState} from 'react'
+import Footer from './Layout/Footer.js'
+import Header from './Components/Header.js'
+import Recipe from './Components/Recipe/Recipe.js'
 
 const App = () => {
-  const [state, setState] = useState(0);
-
-
-  const increment = (e) => {
-    setState((previousStateValue) => previousStateValue + 1)
-  }
-
-  const decrement = (e) => {
-    setState((psv) => psv - 1)
-  }
-
   return (
-    <div style = {{display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
-      <h1>{ state }</h1>
-
-      <div>
-        <button onClick={increment}>+</button>
-        <button onClick={decrement}>-</button>
-      </div>
+    <div>
+      <Header/>
+      <Recipe/>
+      <Footer/>
     </div>
   );
 }
 
-export default App;
+export default App
